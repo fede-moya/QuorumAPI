@@ -30,10 +30,24 @@ class UsersController < ApplicationController
     head :no_content
   end
 
+
+  def authenticate
+    @user = User.where(user:user_params[:user]).first
+    if @user.nil?
+      json_response(authenticated:false,message:"No such user")
+    else
+      if @user.password.eql? user_params[:password]
+        json_response(authenticated:true)
+      else
+        json_response(authenticated:false,message:"Wrong password")
+      end
+    end
+  end
+
   private
 
   def user_params
-    params.permit(:ip, :user, :email, :status, :created_by, :updated_at)
+    params.permit(:ip, :user, :email, :status, :password, :created_by, :updated_at)
   end
 
   def set_user
