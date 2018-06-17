@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   post 'quorums', to: 'quorums#create'
   post 'login', to: 'users#authenticate'
   post 'signup', to: 'users#create'
+  post 'tweet', to: 'users#tweet'
 end

@@ -44,10 +44,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def tweet
+    @user = User.where(user:user_params[:user]).first
+    @user.tweet(user_params[:tweet])
+    json_response("Todo bien")
+  end
+
   private
 
   def user_params
-    params.permit(:ip, :user, :email, :status, :password, :created_by, :updated_at)
+    params.permit(:ip, :user, :email, :status, :password, :created_by, :updated_at,:tweet)
   end
 
   def set_user
