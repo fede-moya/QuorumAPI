@@ -7,7 +7,7 @@ class QuorumsController < ApplicationController
       json_response({messagge:"User not found"},:not_found)
     else
       @quorum = Quorum.create({user:@user})
-      json_response(@quorum, :created)
+      json_response(@quorum.id, :created)
     end
   end
 
