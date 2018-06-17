@@ -40,7 +40,9 @@ class UsersController < ApplicationController
       json_response(authenticated:false,message:"No such user")
     else
       if @user.password.eql? user_params[:password]
-        json_response(authenticated:true)
+        @user.update(ip:user_params[:ip]) unless user_params[:ip].nil?
+        json_response(@user)
+        # json_response(authenticated:true)
       else
         json_response(authenticated:false,message:"Wrong password")
       end
