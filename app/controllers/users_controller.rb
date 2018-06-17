@@ -4,6 +4,9 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
+    if user_params[:status].present?
+      @users = @users.where(status:user_params[:status])
+    end
     json_response(@users)
   end
 
