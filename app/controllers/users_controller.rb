@@ -40,7 +40,7 @@ class UsersController < ApplicationController
       json_response(authenticated:false,message:"No such user")
     else
       if @user.password.eql? user_params[:password]
-        a = @user.update(ip:user_params[:ip])
+        @user.update(ip:user_params[:ip])
         if @user.errors.any?
           json_response(authenticated:false,message:@user.errors.full_messages.first)
         else
